@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import logo from "../../../public/Solevo.png";
+import logo from "/Solevo.png";
 const Logo = () => {
   return (
     <Link to="/">
