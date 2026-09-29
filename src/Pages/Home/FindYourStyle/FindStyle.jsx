@@ -33,7 +33,20 @@ const FindStyle = () => {
           delay: 2000,
           disableOnInteraction: false,
         }}
-        slidesPerView={3}
+        breakpoints={{
+          480: {
+            slidesPerView: 1.5,
+          },
+          640: {
+            slidesPerView: 2,
+          },
+          768: {
+            slidesPerView: 3,
+          },
+          1024: {
+            slidesPerView: 4,
+          },
+        }}
         coverflowEffect={{
           rotate: 30,
           stretch: "20%",

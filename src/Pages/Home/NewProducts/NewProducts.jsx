@@ -20,8 +20,21 @@ const NewProducts = () => {
       <p className="text-blue-500 font-bold">Featured Collections</p>
       <h3 className="text-2xl font-black">Newly Dropped Collection</h3>
       <Swiper
-        slidesPerView={3}
-        spaceBetween={30}
+        spaceBetween={16}
+        breakpoints={{
+          480: {
+            slidesPerView: 1.5,
+          },
+          640: {
+            slidesPerView: 2,
+          },
+          768: {
+            slidesPerView: 3,
+          },
+          1024: {
+            slidesPerView: 4,
+          },
+        }}
         freeMode={true}
         pagination={{
           clickable: true,
