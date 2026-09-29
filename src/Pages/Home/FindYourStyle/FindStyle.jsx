@@ -15,7 +15,7 @@ const FindStyle = () => {
   const { data: products = [] } = useQuery({
     queryKey: ["isPopular"],
     queryFn: async () => {
-      const res = await instance.get("/products?isPopular");
+      const res = await instance.get("/products?type=popular");
       return res.data;
     },
   });
@@ -48,13 +48,10 @@ const FindStyle = () => {
       >
         <div className="grid grid-cols-5 mt-5">
           {products.map((product) => (
-            <div
-              key={product._id}
-              className="card bg-base-100 w-50 h-50 shadow-sm"
-            >
-              <SwiperSlide>
+            <div className="card bg-base-100 w-50 h-50 shadow-sm">
+              <SwiperSlide key={product._id}>
                 <img
-                  className="h-50 w-11/12 bg-cover"
+                  className="h-75 rounded-2xl w-80 bg-cover"
                   src={product.image}
                   alt=""
                 />
