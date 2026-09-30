@@ -8,6 +8,7 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 
 import { Autoplay, EffectCoverflow, Pagination } from "swiper/modules";
+import { easeOut, motion } from "framer-motion";
 
 const FindStyle = () => {
   const instance = useAxios();
@@ -77,9 +78,26 @@ const FindStyle = () => {
           ))}
         </div>
       </Swiper>
-      <div>
+      <motion.div
+        initial={{
+          opacity: 0,
+          y: 80,
+        }}
+        whileInView={{
+          opacity: 1,
+          y: 0,
+        }}
+        viewport={{
+          once: true,
+          amount: 0.2,
+        }}
+        transition={{
+          duration: 0.7,
+          ease: easeOut,
+        }}
+      >
         <img src={image} alt="" />
-      </div>
+      </motion.div>
     </div>
   );
 };

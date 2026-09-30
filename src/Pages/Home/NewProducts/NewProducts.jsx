@@ -66,9 +66,9 @@ const NewProducts = () => {
                 key={product._id}
                 className="card bg-base-100 shadow-sm mt-5 hover:shadow-lg shadow-blue-500 "
               >
-                <figure>
+                <figure className="overflow-hidden rounded-xl relative">
                   <img
-                    className="h-50 rounded-2xl w-60 bg-cover py-3"
+                    className="h-50 w-60 rounded-xl object-cover transition-transform duration-500 ease-in-out hover:scale-110"
                     src={product.image}
                     alt="Shoes"
                   />
