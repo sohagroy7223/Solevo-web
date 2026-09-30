@@ -37,7 +37,7 @@ const Recommended = () => {
         duration: 0.7,
         ease: easeOut,
       }}
-      className="flex  justify-center flex-col gap-3  items-center"
+      className="flex  justify-center flex-col gap-3 text-center items-center"
     >
       <h3 className="text-2xl font-black ">
         Most Recommended Collections For You

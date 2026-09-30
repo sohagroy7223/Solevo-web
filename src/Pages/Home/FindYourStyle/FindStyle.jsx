@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxios from "../../../Hooks/useAxios";
-
+import image from "../../../assets/img.png";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
@@ -77,6 +77,9 @@ const FindStyle = () => {
           ))}
         </div>
       </Swiper>
+      <div>
+        <img src={image} alt="" />
+      </div>
     </div>
   );
 };
