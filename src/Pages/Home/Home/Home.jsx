@@ -1,3 +1,4 @@
+import Also_Like from "../Also_Like/Also_Like";
 import Banner from "../Banner/Banner";
 import FindStyle from "../FindYourStyle/FindStyle";
 import NewProducts from "../NewProducts/NewProducts";
@@ -10,6 +11,7 @@ const Home = () => {
       <NewProducts></NewProducts>
       <Recommended></Recommended>
       <FindStyle></FindStyle>
+      <Also_Like></Also_Like>
     </div>
   );
 };

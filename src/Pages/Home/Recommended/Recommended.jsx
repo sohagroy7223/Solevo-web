@@ -42,11 +42,11 @@ const Recommended = () => {
       <h3 className="text-2xl font-black ">
         Most Recommended Collections For You
       </h3>
-      <p className="text-blue-500 font-bold">Featured Collections</p>
+      <p className="text-blue-500 font-bold">Most Recommended for you</p>
       <div className="grid md:grid-cols-4 grid-cols-2 gap-2 ">
         {images.map((image) => (
           <div className="bg-base-100 shadow-sm ">
-            <figure className="overflow-hidden rounded-xl">
+            <figure className="overflow-hidden rounded-xl relative">
               <img
                 className="w-80 h-60 rounded-xl object-cover transition-transform duration-500 ease-in-out hover:scale-110"
                 src={image}

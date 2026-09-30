@@ -22,7 +22,7 @@ const FindStyle = () => {
   console.log(products);
   return (
     <div>
-      <p className="text-blue-500 font-bold">shope by category</p>
+      <p className="text-blue-500 font-bold">For you</p>
       <h3 className="text-2xl font-black">Find Your Style</h3>
 
       <Swiper

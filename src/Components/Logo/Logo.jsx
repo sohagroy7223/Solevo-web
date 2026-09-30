@@ -3,7 +3,7 @@ import logo from "/Solevo.png";
 const Logo = () => {
   return (
     <Link to="/">
-      <div className="flex w-20 h-18">
+      <div className="flex w-23 h-20 p-0">
         <img src={logo} alt="" />
       </div>
     </Link>

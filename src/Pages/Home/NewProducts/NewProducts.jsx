@@ -3,6 +3,7 @@ import useAxios from "../../../Hooks/useAxios";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { easeOut, motion } from "framer-motion";
 import { FreeMode, Pagination } from "swiper/modules";
+import { FaStar } from "react-icons/fa";
 
 const NewProducts = () => {
   const instance = useAxios();
@@ -17,7 +18,7 @@ const NewProducts = () => {
 
   return (
     <div>
-      <p className="text-blue-500 font-bold">Featured Collections</p>
+      <p className="text-blue-500 font-bold">Shop by Category</p>
       <h3 className="text-2xl font-black">Newly Dropped Collection</h3>
       <Swiper
         spaceBetween={16}
@@ -77,6 +78,12 @@ const NewProducts = () => {
                   {product.colors.map((color, index) => (
                     <p key={index}>{color}</p>
                   ))}
+                  <p className="flex items-center gap-2">
+                    <FaStar className="text-yellow-400"></FaStar>{" "}
+                    <span>
+                      {product.rating}({product.reviews})
+                    </span>
+                  </p>
                   <div className="flex justify-between items-center">
                     <div className="flex items-center gap-3">
                       <b className="text-xl">${product.price}</b>
