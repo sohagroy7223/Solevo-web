@@ -17,7 +17,7 @@ const Also_Like = () => {
       return res.data;
     },
   });
-  console.log(products);
+  //   console.log(products);
   return (
     <div className="flex  justify-center flex-col gap-3 text-center items-center">
       <h3 className="text-2xl font-black ">You Might Also Like</h3>
