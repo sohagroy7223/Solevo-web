@@ -1,4 +1,4 @@
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 import Logo from "../../../Components/Logo/Logo";
 import { AuthContext } from "../../../Context/AuthContext";
 import { use } from "react";
@@ -115,7 +115,7 @@ const Navbar = () => {
                 <a>Settings</a>
               </li>
               <li>
-                <a>Logout</a>
+                <Link to="login">Login</Link>
               </li>
             </ul>
           </div>
