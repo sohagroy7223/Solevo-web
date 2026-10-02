@@ -17,7 +17,7 @@ const Register = () => {
 
   const handelRegister = async (data) => {
     try {
-      console.log("Form Data:", data);
+      //   console.log("Form Data:", data);
 
       // image
       const profileImage = data.image[0];
@@ -37,11 +37,7 @@ const Register = () => {
       // 4. Upload image
       const imageResponse = await axios.post(image_API_URL, formData);
 
-      //   console.log("ImgBB Response:", imageResponse.data);
-
       const image = imageResponse.data.data.url;
-
-      //   console.log("Image URL:", image);
 
       // 5. User information
       const userInfo = {
@@ -55,9 +51,7 @@ const Register = () => {
         console.log(res.data);
       });
 
-      //   console.log("MongoDB Response:", response.data);
-
-      alert("Registration successful!");
+      // console.log("MongoDB Response:", response.data);
     } catch (error) {
       console.log("Registration Error:", error);
     }
