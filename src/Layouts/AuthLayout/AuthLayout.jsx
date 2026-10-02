@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { Outlet, useLocation } from "react-router";
 import Logo from "../../Components/Logo/Logo";
-
 const AuthLayout = () => {
   const { pathname } = useLocation();
 
