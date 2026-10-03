@@ -1,6 +1,6 @@
 const Social_Login = () => {
   return (
-    <div>
+    <div className="flex justify-center items-center mt-2">
       <button className="btn bg-white text-black border-[#e5e5e5]">
         <svg
           aria-label="Google logo"

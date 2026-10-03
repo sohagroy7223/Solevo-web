@@ -4,6 +4,7 @@ import axios from "axios";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { Link } from "react-router";
 import Social_Login from "../../Components/SocialLogin/Social_Login";
+import Swal from "sweetalert2";
 
 const Register = () => {
   const { createUser } = useAuth();
@@ -49,6 +50,15 @@ const Register = () => {
       // 6. Save user to MongoDB
       axiosSecure.post("/users", userInfo).then((res) => {
         console.log(res.data);
+        if (res.data.insertedId) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "your register has been success",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
       });
 
       // console.log("MongoDB Response:", response.data);
@@ -153,7 +163,7 @@ const Register = () => {
 
           <button
             type="submit"
-            className="btn bg-primary text-secondary font-bold mt-4"
+            className="btn bg-primary text-white font-bold mt-4"
           >
             Sign Up
           </button>
