@@ -1,9 +1,36 @@
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useNavigate } from "react-router";
 import Logo from "../../../Components/Logo/Logo";
-import { AuthContext } from "../../../Context/AuthContext";
-import { use } from "react";
+import useAuth from "../../../Hooks/useAuth";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
+  const { user, logOutUser } = useAuth();
+  const navigate = useNavigate();
+
+  const handelSignOut = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be logOut",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, logOut!",
+    }).then((result) => {
+      if (result.isConfirmed)
+        logOutUser().then(() => {
+          navigate("login");
+          Swal.fire({
+            position: "top-center",
+            icon: "success",
+            title: "user logOut",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        });
+    });
+  };
+
   const links = (
     <>
       <li>
@@ -59,9 +86,6 @@ const Navbar = () => {
     </>
   );
 
-  const { user } = use(AuthContext);
-  console.log(user);
-
   return (
     <div className="navbar bg-base-100 shadow-sm rounded-sm">
       <div className="navbar-start">
@@ -115,7 +139,11 @@ const Navbar = () => {
                 <a>Settings</a>
               </li>
               <li>
-                <Link to="login">Login</Link>
+                {user ? (
+                  <Link onClick={handelSignOut}>Logout</Link>
+                ) : (
+                  <Link to="login">Login</Link>
+                )}
               </li>
             </ul>
           </div>
