@@ -12,7 +12,10 @@ const Login = () => {
   } = useForm();
 
   const handelLogin = (data) => {
-    loginUser(data.email, data.password);
+    console.log(data);
+    loginUser(data.email, data.password).then((res) => {
+      console.log(res);
+    });
   };
 
   return (
