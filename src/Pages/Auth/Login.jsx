@@ -3,20 +3,27 @@ import { Link, useLocation, useNavigate } from "react-router";
 import useAuth from "../../Hooks/useAuth";
 
 const Login = () => {
-  const { loginUser } = useAuth();
+  const { loginUser, resetPasswordMail } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors },
   } = useForm();
 
   const handelLogin = (data) => {
-    console.log(data);
     loginUser(data.email, data.password).then(() => {
       navigate(location?.state || "/");
+    });
+  };
+
+  const handelForgetEmail = () => {
+    const email = getValues("email");
+    resetPasswordMail(email).then(() => {
+      alert("please check your email and reset your password");
     });
   };
 
@@ -49,7 +56,9 @@ const Login = () => {
               <p className="text-red-500">password field is required</p>
             )}
             <div>
-              <a className="link link-hover">Forgot password?</a>
+              <a onClick={handelForgetEmail} className="link link-hover">
+                Forgot password?
+              </a>
             </div>
             <button className="btn btn-neutral mt-4">Login</button>
           </form>
