@@ -45,12 +45,12 @@ const Navbar = () => {
       </li>
       <li>
         <NavLink
-          to="shope"
+          to="allProducts"
           className={({ isActive }) =>
             isActive ? "mr-4 font-bold bg-primary" : "mr-4"
           }
         >
-          Shop
+          All Products
         </NavLink>
       </li>
       <li>
