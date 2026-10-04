@@ -1,7 +1,23 @@
+import { useLocation, useNavigate } from "react-router";
+import useAuth from "../../Hooks/useAuth";
+
 const Social_Login = () => {
+  const { signInWithGoogle } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handelGoogleLogin = () => {
+    signInWithGoogle().then(() => {
+      navigate(location?.state || "/");
+    });
+  };
+
   return (
     <div className="flex justify-center items-center mt-2">
-      <button className="btn bg-white text-black border-[#e5e5e5]">
+      <button
+        onClick={handelGoogleLogin}
+        className="btn bg-white text-black border-[#e5e5e5]"
+      >
         <svg
           aria-label="Google logo"
           width="16"

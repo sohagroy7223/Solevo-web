@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router";
 import useAuth from "../../Hooks/useAuth";
+import Social_Login from "../../Components/SocialLogin/Social_Login";
 
 const Login = () => {
   const { loginUser, resetPasswordMail } = useAuth();
@@ -71,6 +72,7 @@ const Login = () => {
               Register
             </Link>
           </p>
+          <Social_Login></Social_Login>
         </div>
       </div>
     </div>
