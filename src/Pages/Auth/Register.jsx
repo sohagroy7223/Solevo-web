@@ -2,13 +2,15 @@ import { useForm } from "react-hook-form";
 import useAuth from "../../Hooks/useAuth";
 import axios from "axios";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import Social_Login from "../../Components/SocialLogin/Social_Login";
 import Swal from "sweetalert2";
 
 const Register = () => {
-  const { createUser } = useAuth();
+  const { createUser, verifyEmail } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const {
     register,
@@ -25,8 +27,6 @@ const Register = () => {
 
       // 1. Create Firebase user
       createUser(data.email, data.password);
-
-      //   console.log("Firebase User:", result);
 
       // 2. Create FormData
       const formData = new FormData();
@@ -49,7 +49,10 @@ const Register = () => {
 
       // 6. Save user to MongoDB
       axiosSecure.post("/users", userInfo).then((res) => {
-        console.log(res.data);
+        verifyEmail().then(() => {
+          alert("please verified your email");
+        });
+        navigate(location?.state || "/");
         if (res.data.insertedId) {
           Swal.fire({
             position: "top-end",

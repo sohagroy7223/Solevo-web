@@ -20,7 +20,7 @@ const FindStyle = () => {
       return res.data;
     },
   });
-  console.log(products);
+  // console.log(products);
   return (
     <div>
       <p className="text-blue-500 font-bold">For you</p>

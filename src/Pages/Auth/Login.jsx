@@ -1,10 +1,11 @@
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import useAuth from "../../Hooks/useAuth";
 
 const Login = () => {
   const { loginUser } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const {
     register,
@@ -14,8 +15,8 @@ const Login = () => {
 
   const handelLogin = (data) => {
     console.log(data);
-    loginUser(data.email, data.password).then((res) => {
-      navigate("/");
+    loginUser(data.email, data.password).then(() => {
+      navigate(location?.state || "/");
     });
   };
 
