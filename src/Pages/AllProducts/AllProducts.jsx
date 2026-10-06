@@ -13,6 +13,7 @@ const AllProducts = () => {
       return res.data;
     },
   });
+
   return (
     <div className="flex justify-center flex-col gap-2 text-center ">
       <h3 className="text-2xl font-black ">Àll Products</h3>
@@ -20,27 +21,42 @@ const AllProducts = () => {
 
       <div className="md:flex justify-center md:gap-5 gap-2 w-full items-center md:px-6">
         <fieldset className="fieldset max-w-md flex justify-center">
-          <input type="text" className="input" placeholder="Type here" />
+          <input
+            type="text"
+            className="input"
+            placeholder="Search the products here"
+          />
         </fieldset>
 
-        {/* <div className="flex  gap-5 justify-baseline w-full"> */}
-        <select defaultValue="Medium" className="select select-md">
-          <option disabled={true}>Medium</option>
-          <option>Medium Apple</option>
-          <option>Medium Orange</option>
-          <option>Medium Tomato</option>
+        <select defaultValue="Select Category" className="select select-md">
+          <option disabled={true}>Select Category</option>
+          {[...new Set(products.map((product) => product.category))].map(
+            (category) => (
+              <option key={category} value={category}>
+                {category}
+              </option>
+            ),
+          )}
         </select>
-        <select defaultValue="Medium" className="select select-md">
-          <option disabled={true}>Medium</option>
-          <option>Medium Apple</option>
-          <option>Medium Orange</option>
-          <option>Medium Tomato</option>
+        <select defaultValue="Select Brand" className="select select-md">
+          <option disabled={true}>Select Brand</option>
+          {[...new Set(products.map((product) => product.brand))].map(
+            (brand) => (
+              <option key={brand} value={brand}>
+                {brand}
+              </option>
+            ),
+          )}
         </select>
-        <select defaultValue="Medium" className="select select-md">
-          <option disabled={true}>Medium</option>
-          <option>Medium Apple</option>
-          <option>Medium Orange</option>
-          <option>Medium Tomato</option>
+        <select defaultValue="Select gender" className="select select-md">
+          <option disabled={true}>Select gender</option>
+          {[...new Set(products.map((product) => product.gender))].map(
+            (gender) => (
+              <option key={gender} value={gender}>
+                {gender}
+              </option>
+            ),
+          )}
         </select>
         {/* </div> */}
       </div>
@@ -69,7 +85,7 @@ const AllProducts = () => {
           >
             <figure>
               <img
-                className="md:h-50 md:w-60 bg-gray-600 rounded-xl object-cover transition-transform duration-500 ease-in-out hover:scale-110"
+                className="md:h-50 h-35 w-full bg-gray-600 rounded-xl object-cover transition-transform duration-500 ease-in-out hover:scale-110"
                 src={product.image}
                 alt="Shoes"
               />
