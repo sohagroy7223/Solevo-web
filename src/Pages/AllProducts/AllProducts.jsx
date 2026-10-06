@@ -2,17 +2,23 @@ import { easeOut, motion } from "framer-motion";
 import useAxios from "../../Hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
 import { FaStar } from "react-icons/fa";
+import { useState } from "react";
 
 const AllProducts = () => {
   const instance = useAxios();
+  const [search, setSearch] = useState("");
 
   const { data: products = [] } = useQuery({
-    queryKey: ["allProducts"],
+    queryKey: ["allProducts", search],
     queryFn: async () => {
-      const res = await instance.get(`/allProducts`);
+      const res = await instance.get(`/allProducts?search=${search}`);
       return res.data;
     },
   });
+
+  const handelSearchProducts = (e) => {
+    setSearch(e.target.value);
+  };
 
   return (
     <div className="flex justify-center flex-col gap-2 text-center ">
@@ -24,6 +30,7 @@ const AllProducts = () => {
           <input
             type="text"
             className="input"
+            onChange={handelSearchProducts}
             placeholder="Search the products here"
           />
         </fieldset>
