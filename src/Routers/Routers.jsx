@@ -23,6 +23,7 @@ export const router = createBrowserRouter([
         path: "/allProducts",
         Component: AllProducts,
       },
+
       {
         path: "/profile",
         Component: Profile,

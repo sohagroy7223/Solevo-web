@@ -6,7 +6,7 @@ import { motion, easeOut } from "framer-motion";
 
 const Also_Like = () => {
   const instance = useAxios();
-  const [brand, setBrand] = useState([]);
+  const [brand] = useState([]);
 
   const { data: products = [] } = useQuery({
     queryKey: ["also-like"],
@@ -17,7 +17,7 @@ const Also_Like = () => {
       return res.data;
     },
   });
-  //   console.log(products);
+
   return (
     <div className="flex  justify-center flex-col gap-3 text-center items-center">
       <h3 className="text-2xl font-black ">You Might Also Like</h3>
@@ -63,10 +63,9 @@ const Also_Like = () => {
               <div className="flex justify-between items-center">
                 <div className="flex items-center gap-3">
                   <b className="text-xl">${product.price}</b>
-                  <p className="line-through text-gray-600">
+                  <b className="line-through text-gray-600">
                     ${product.oldPrice}
-                    {() => setBrand(product)}
-                  </p>
+                  </b>
                 </div>
                 <div>
                   <div className="border text-sm flex items-center bg-red-100 rounded-full p-1 mt-5">
