@@ -4,9 +4,12 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { easeOut, motion } from "framer-motion";
 import { FreeMode, Pagination } from "swiper/modules";
 import { FaStar } from "react-icons/fa";
+import { useRef, useState } from "react";
 
 const NewProducts = () => {
   const instance = useAxios();
+  const [data, setProduct] = useState(null);
+  const modalRef = useRef();
 
   const { data: newProducts = [] } = useQuery({
     queryKey: ["newProducts"],
@@ -15,6 +18,11 @@ const NewProducts = () => {
       return res.data;
     },
   });
+
+  const handelShowModal = (selectedProduct) => {
+    setProduct(selectedProduct);
+    modalRef.current.showModal();
+  };
 
   return (
     <div>
@@ -99,12 +107,71 @@ const NewProducts = () => {
                     </div>
                   </div>
                 </div>
-                <button className="btn btn-primary">Add to Card</button>
+                <button
+                  onClick={() => handelShowModal(product)}
+                  className="btn btn-primary"
+                >
+                  view Details
+                </button>
               </motion.div>
             </SwiperSlide>
           ))}
         </div>
       </Swiper>
+
+      <dialog
+        ref={modalRef}
+        id="my_modal_5"
+        className="modal modal-bottom sm:modal-middle"
+      >
+        <div className="modal-box">
+          <div className="flex text-center">
+            <figure className="overflow-hidden rounded-xl relative">
+              <img
+                className="h-50 w-60 rounded-xl object-cover transition-transform duration-500 ease-in-out hover:scale-110"
+                src={data?.image}
+                alt="Shoes"
+              />
+            </figure>
+            <div className="p-1 bg-gray-50 space-y-1">
+              <h2 className="text-sm font-bold">Name : {data?.name}</h2>
+              <h2 className="text-sm font-bold">Brand : {data?.brand}</h2>
+              <h2 className="text-sm font-bold">category : {data?.category}</h2>
+              <p>
+                color: <span>{data?.colors}</span>
+              </p>
+              <p className="flex items-center gap-2 ">
+                <FaStar className="text-yellow-400"></FaStar>{" "}
+                <span>
+                  {data?.rating}({data?.reviews})
+                </span>
+              </p>
+              <div className="flex justify-between gap-2 items-center ">
+                <div className="md:flex justify-between items-center gap-3 w-full">
+                  <div className="flex items-center gap-2">
+                    <b className="text-xl">${data?.price}</b>
+                    <p className="line-through text-gray-600">
+                      ${data?.oldPrice}
+                    </p>
+                  </div>
+                </div>
+                <div className="border flex items-center text-sm bg-red-100 rounded-full md:p-1">
+                  <p>{data?.discount}</p>
+                  <span className="text-sm">%OFF</span>
+                </div>
+              </div>
+              <p> stock: {data?.stock}</p>
+            </div>
+          </div>
+          <div className="flex justify-end gap-2 mt-2">
+            <form method="dialog">
+              {/* if there is a button in form, it will close the modal */}
+              <button className="btn">Close</button>
+            </form>
+            <button className="btn bg-primary text-white">Add to Card</button>
+          </div>
+        </div>
+      </dialog>
     </div>
   );
 };

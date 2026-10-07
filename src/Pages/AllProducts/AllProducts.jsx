@@ -66,7 +66,7 @@ const AllProducts = () => {
     modalRef.current.showModal();
   };
 
-  console.log(data);
+  // console.log(data);
 
   return (
     <div className="flex justify-center flex-col gap-2 text-center ">
@@ -203,7 +203,7 @@ const AllProducts = () => {
                 alt="Shoes"
               />
             </figure>
-            <div className="p-1 bg-gray-200 space-y-1">
+            <div className="p-1 bg-gray-50 space-y-1">
               <h2 className="text-sm font-bold">Name : {data?.name}</h2>
               <h2 className="text-sm font-bold">Brand : {data?.brand}</h2>
               <h2 className="text-sm font-bold">category : {data?.category}</h2>
