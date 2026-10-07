@@ -4,12 +4,16 @@ import { FaStar } from "react-icons/fa";
 import { useRef, useState } from "react";
 import { motion, easeOut } from "framer-motion";
 import Swal from "sweetalert2";
+import useAuth from "../../../Hooks/useAuth";
+import { useNavigate } from "react-router";
 
 const Also_Like = () => {
   const instance = useAxios();
   const [brand] = useState([]);
   const modalRef = useRef();
   const [data, setProduct] = useState(null);
+  const { user } = useAuth();
+  const navigate = useNavigate();
 
   const { data: products = [] } = useQuery({
     queryKey: ["also-like"],
@@ -166,7 +170,13 @@ const Also_Like = () => {
               <button className="btn">Close</button>
             </form>
             <button
-              onClick={() => handelAddToCard(data)}
+              onClick={() => {
+                if (user) {
+                  handelAddToCard(data);
+                } else {
+                  navigate("/login");
+                }
+              }}
               className="btn bg-primary text-white"
             >
               Add to Card

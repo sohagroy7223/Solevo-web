@@ -4,15 +4,19 @@ import { useQuery } from "@tanstack/react-query";
 import { FaStar } from "react-icons/fa";
 import { useRef, useState } from "react";
 import Swal from "sweetalert2";
+import useAuth from "../../Hooks/useAuth";
+import { useNavigate } from "react-router";
 
 const AllProducts = () => {
   const instance = useAxios();
+  const { user } = useAuth();
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("");
   const [brand, setBrand] = useState("");
   const [gender, setGender] = useState("");
   const modalRef = useRef();
   const [data, setProduct] = useState(null);
+  const navigate = useNavigate();
 
   const { data: products = [] } = useQuery({
     queryKey: ["allProducts", search, category, brand, gender],
@@ -264,7 +268,13 @@ const AllProducts = () => {
               <button className="btn">Close</button>
             </form>
             <button
-              onClick={() => handelAddToCard(data)}
+              onClick={() => {
+                if (user) {
+                  handelAddToCard(data);
+                } else {
+                  navigate("/login");
+                }
+              }}
               className="btn bg-primary text-white"
             >
               Add to Card

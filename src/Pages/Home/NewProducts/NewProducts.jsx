@@ -6,11 +6,15 @@ import { FreeMode, Pagination } from "swiper/modules";
 import { FaStar } from "react-icons/fa";
 import { useRef, useState } from "react";
 import Swal from "sweetalert2";
+import useAuth from "../../../Hooks/useAuth";
+import { useNavigate } from "react-router";
 
 const NewProducts = () => {
   const instance = useAxios();
   const [data, setProduct] = useState(null);
   const modalRef = useRef();
+  const { user } = useAuth();
+  const navigate = useNavigate();
 
   const { data: newProducts = [] } = useQuery({
     queryKey: ["newProducts"],
@@ -194,7 +198,13 @@ const NewProducts = () => {
               <button className="btn">Close</button>
             </form>
             <button
-              onClick={() => handelAddToCard(data)}
+              onClick={() => {
+                if (user) {
+                  handelAddToCard(data);
+                } else {
+                  navigate("/login");
+                }
+              }}
               className="btn bg-primary text-white"
             >
               Add to Card
