@@ -3,6 +3,7 @@ import useAxios from "../../../Hooks/useAxios";
 import { FaStar } from "react-icons/fa";
 import { useRef, useState } from "react";
 import { motion, easeOut } from "framer-motion";
+import Swal from "sweetalert2";
 
 const Also_Like = () => {
   const instance = useAxios();
@@ -23,6 +24,30 @@ const Also_Like = () => {
   const handelShowModal = (selectedProduct) => {
     setProduct(selectedProduct);
     modalRef.current.showModal();
+  };
+
+  const handelAddToCard = (productData) => {
+    const productDetail = {
+      brand: productData.brand,
+      id: productData._id,
+      name: productData.name,
+      category: productData.category,
+      gender: productData.gender,
+      image: productData.image,
+      description: productData.description,
+    };
+    instance.post("/cards", productDetail).then((res) => {
+      if (res.data.insertedId) {
+        modalRef.current.close();
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "this product has been add",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    });
   };
 
   return (
@@ -140,7 +165,12 @@ const Also_Like = () => {
               {/* if there is a button in form, it will close the modal */}
               <button className="btn">Close</button>
             </form>
-            <button className="btn bg-primary text-white">Add to Card</button>
+            <button
+              onClick={() => handelAddToCard(data)}
+              className="btn bg-primary text-white"
+            >
+              Add to Card
+            </button>
           </div>
         </div>
       </dialog>

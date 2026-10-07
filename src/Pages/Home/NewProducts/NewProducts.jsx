@@ -5,6 +5,7 @@ import { easeOut, motion } from "framer-motion";
 import { FreeMode, Pagination } from "swiper/modules";
 import { FaStar } from "react-icons/fa";
 import { useRef, useState } from "react";
+import Swal from "sweetalert2";
 
 const NewProducts = () => {
   const instance = useAxios();
@@ -22,6 +23,30 @@ const NewProducts = () => {
   const handelShowModal = (selectedProduct) => {
     setProduct(selectedProduct);
     modalRef.current.showModal();
+  };
+
+  const handelAddToCard = (productData) => {
+    const productDetail = {
+      brand: productData.brand,
+      id: productData._id,
+      name: productData.name,
+      category: productData.category,
+      gender: productData.gender,
+      image: productData.image,
+      description: productData.description,
+    };
+    instance.post("/cards", productDetail).then((res) => {
+      if (res.data.insertedId) {
+        modalRef.current.close();
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "this product has been add",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    });
   };
 
   return (
@@ -168,7 +193,12 @@ const NewProducts = () => {
               {/* if there is a button in form, it will close the modal */}
               <button className="btn">Close</button>
             </form>
-            <button className="btn bg-primary text-white">Add to Card</button>
+            <button
+              onClick={() => handelAddToCard(data)}
+              className="btn bg-primary text-white"
+            >
+              Add to Card
+            </button>
           </div>
         </div>
       </dialog>

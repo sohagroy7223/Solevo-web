@@ -79,6 +79,7 @@ const AllProducts = () => {
     };
     instance.post("/cards", productDetail).then((res) => {
       if (res.data.insertedId) {
+        modalRef.current.close();
         Swal.fire({
           position: "top-end",
           icon: "success",
@@ -90,7 +91,7 @@ const AllProducts = () => {
     });
   };
 
-  console.log(data);
+  // console.log(data);
 
   return (
     <div className="flex justify-center flex-col gap-2 text-center ">
