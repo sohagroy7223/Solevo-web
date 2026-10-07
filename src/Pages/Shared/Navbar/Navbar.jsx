@@ -63,16 +63,18 @@ const Navbar = () => {
           New Arrivals
         </NavLink>
       </li>
-      <li>
-        <NavLink
-          to="/"
-          className={({ isActive }) =>
-            isActive ? "mr-4 font-bold bg-primary" : "mr-4"
-          }
-        >
-          Card
-        </NavLink>
-      </li>
+      {user && (
+        <li>
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              isActive ? "mr-4 font-bold bg-primary" : "mr-4"
+            }
+          >
+            Card
+          </NavLink>
+        </li>
+      )}
       <li>
         <NavLink
           to="/"

@@ -2,7 +2,7 @@ import useAuth from "../../Hooks/useAuth";
 
 const Profile = () => {
   const { user } = useAuth();
-  console.log(user);
+  // console.log(user);
   return (
     <div className="w-full flex flex-col justify-center items-center ">
       <img className="rounded-full " src={user?.photoURL} alt="" />
