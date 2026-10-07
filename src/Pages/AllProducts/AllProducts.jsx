@@ -3,6 +3,7 @@ import useAxios from "../../Hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
 import { FaStar } from "react-icons/fa";
 import { useRef, useState } from "react";
+import Swal from "sweetalert2";
 
 const AllProducts = () => {
   const instance = useAxios();
@@ -66,7 +67,30 @@ const AllProducts = () => {
     modalRef.current.showModal();
   };
 
-  // console.log(data);
+  const handelAddToCard = (productData) => {
+    const productDetail = {
+      brand: productData.brand,
+      id: productData._id,
+      name: productData.name,
+      category: productData.category,
+      gender: productData.gender,
+      image: productData.image,
+      description: productData.description,
+    };
+    instance.post("/cards", productDetail).then((res) => {
+      if (res.data.insertedId) {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "this product has been add",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    });
+  };
+
+  console.log(data);
 
   return (
     <div className="flex justify-center flex-col gap-2 text-center ">
@@ -238,7 +262,12 @@ const AllProducts = () => {
               {/* if there is a button in form, it will close the modal */}
               <button className="btn">Close</button>
             </form>
-            <button className="btn bg-primary text-white">Add to Card</button>
+            <button
+              onClick={() => handelAddToCard(data)}
+              className="btn bg-primary text-white"
+            >
+              Add to Card
+            </button>
           </div>
         </div>
       </dialog>
