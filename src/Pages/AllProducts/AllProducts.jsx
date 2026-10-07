@@ -7,11 +7,49 @@ import { useState } from "react";
 const AllProducts = () => {
   const instance = useAxios();
   const [search, setSearch] = useState("");
+  const [category, setCategory] = useState("");
+  const [brand, setBrand] = useState("");
+  const [gender, setGender] = useState("");
 
   const { data: products = [] } = useQuery({
-    queryKey: ["allProducts", search],
+    queryKey: ["allProducts", search, category, brand, gender],
     queryFn: async () => {
-      const res = await instance.get(`/allProducts?search=${search}`);
+      const res = await instance.get(
+        `/allProducts?search=${search}&category=${category}&brand=${brand}&gender=${gender}`,
+      );
+      return res.data;
+    },
+  });
+
+  const { data: categories = [] } = useQuery({
+    queryKey: ["categories", brand, gender],
+    queryFn: async () => {
+      const res = await instance.get(
+        `/filter-options?type=category&brand=${brand}&gender=${gender}`,
+      );
+
+      return res.data;
+    },
+  });
+
+  const { data: brands = [] } = useQuery({
+    queryKey: ["brands", category, gender],
+    queryFn: async () => {
+      const res = await instance.get(
+        `/filter-options?type=brand&category=${category}&gender=${gender}`,
+      );
+
+      return res.data;
+    },
+  });
+
+  const { data: genders = [] } = useQuery({
+    queryKey: ["genders", category, brand],
+    queryFn: async () => {
+      const res = await instance.get(
+        `/filter-options?type=gender&category=${category}&brand=${brand}`,
+      );
+
       return res.data;
     },
   });
@@ -25,47 +63,57 @@ const AllProducts = () => {
       <h3 className="text-2xl font-black ">Àll Products</h3>
       <p className="text-blue-500 font-bold">Featured Collections</p>
 
-      <div className="md:flex justify-center md:gap-5 gap-2 w-full items-center md:px-6">
-        <fieldset className="fieldset max-w-md flex justify-center">
-          <input
-            type="text"
-            className="input"
-            onChange={handelSearchProducts}
-            placeholder="Search the products here"
-          />
-        </fieldset>
+      <fieldset className="fieldset max-w-md flex justify-center mx-auto w-full">
+        <input
+          type="text"
+          className="input"
+          onChange={handelSearchProducts}
+          placeholder="Search the products here"
+        />
+      </fieldset>
 
-        <select defaultValue="Select Category" className="select select-md">
-          <option disabled={true}>Select Category</option>
-          {[...new Set(products.map((product) => product.category))].map(
-            (category) => (
-              <option key={category} value={category}>
-                {category}
-              </option>
-            ),
-          )}
+      <div className="md:flex justify-center md:gap-5 gap-2 w-full items-center md:px-6">
+        <select
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          className="select select-md"
+        >
+          <option value="">Select Category</option>
+
+          {categories.map((item) => (
+            <option key={item} value={item}>
+              {item}
+            </option>
+          ))}
         </select>
-        <select defaultValue="Select Brand" className="select select-md">
-          <option disabled={true}>Select Brand</option>
-          {[...new Set(products.map((product) => product.brand))].map(
-            (brand) => (
-              <option key={brand} value={brand}>
-                {brand}
-              </option>
-            ),
-          )}
+
+        <select
+          value={brand}
+          onChange={(e) => setBrand(e.target.value)}
+          className="select select-md"
+        >
+          <option value="">Select Brand</option>
+
+          {brands.map((item) => (
+            <option key={item} value={item}>
+              {item}
+            </option>
+          ))}
         </select>
-        <select defaultValue="Select gender" className="select select-md">
-          <option disabled={true}>Select gender</option>
-          {[...new Set(products.map((product) => product.gender))].map(
-            (gender) => (
-              <option key={gender} value={gender}>
-                {gender}
-              </option>
-            ),
-          )}
+
+        <select
+          value={gender}
+          onChange={(e) => setGender(e.target.value)}
+          className="select select-md"
+        >
+          <option value="">Select Gender</option>
+
+          {genders.map((item) => (
+            <option key={item} value={item}>
+              {item}
+            </option>
+          ))}
         </select>
-        {/* </div> */}
       </div>
 
       <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-3 p-4">
@@ -114,7 +162,7 @@ const AllProducts = () => {
                     </p>
                   </div>
                 </div>
-                <div className="border flex items-center text-sm bg-red-300 rounded-full md:p-1">
+                <div className="border flex items-center text-sm bg-red-100 rounded-full md:p-1">
                   <p>{product.discount}</p>
                   <span className="text-sm">%OFF</span>
                 </div>
