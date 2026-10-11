@@ -7,7 +7,7 @@ import Social_Login from "../../Components/SocialLogin/Social_Login";
 import Swal from "sweetalert2";
 
 const Register = () => {
-  const { createUser, verifyEmail } = useAuth();
+  const { createUser, updateUserProfile, verifyEmail } = useAuth();
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
   const location = useLocation();
@@ -18,7 +18,7 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
-  const handelRegister = async (data) => {
+  const handelRegister = (data) => {
     try {
       //   console.log("Form Data:", data);
 
@@ -26,47 +26,54 @@ const Register = () => {
       const profileImage = data.image[0];
 
       // 1. Create Firebase user
-      createUser(data.email, data.password);
+      createUser(data.email, data.password).then(async () => {
+        // 2. Create FormData
+        const formData = new FormData();
+        formData.append("image", profileImage);
 
-      // 2. Create FormData
-      const formData = new FormData();
-      formData.append("image", profileImage);
+        // 3. ImgBB URL
+        const image_API_URL = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMAGE_HOST_KEY}`;
 
-      // 3. ImgBB URL
-      const image_API_URL = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMAGE_HOST_KEY}`;
+        // 4. Upload image
+        const imageResponse = await axios.post(image_API_URL, formData);
 
-      // 4. Upload image
-      const imageResponse = await axios.post(image_API_URL, formData);
+        const image = imageResponse.data.data.url;
 
-      const image = imageResponse.data.data.url;
+        // 5. User information
+        const userInfo = {
+          email: data.email,
+          displayName: data.name,
+          photoURL: image,
+        };
 
-      // 5. User information
-      const userInfo = {
-        email: data.email,
-        displayName: data.name,
-        photoURL: image,
-      };
-
-      // 6. Save user to MongoDB
-      axiosSecure.post("/users", userInfo).then((res) => {
-        verifyEmail().then(() => {
-          alert("please verified your email");
-        });
-        navigate(location?.state || "/");
-        if (res.data.insertedId) {
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "your register has been success",
-            showConfirmButton: false,
-            timer: 1500,
+        updateUserProfile(userInfo).then(() => {
+          verifyEmail().then(() => {
+            alert("please verified your email");
           });
-        }
-      });
+        });
 
-      // console.log("MongoDB Response:", response.data);
+        // 6. Save user to MongoDB
+        axiosSecure
+          .post("/users", userInfo)
+          .then((res) => {
+            navigate(location?.state || "/");
+            if (res.data.insertedId) {
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "your register has been success",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+            }
+          })
+          // console.log("MongoDB Response:", response.data);
+          .catch((error) => {
+            console.log("Registration Error:", error);
+          });
+      });
     } catch (error) {
-      console.log("Registration Error:", error);
+      console.log(error);
     }
   };
 

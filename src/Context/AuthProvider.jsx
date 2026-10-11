@@ -7,6 +7,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 import { auth } from "../Firebase/Firebase.init";
 import { AuthContext } from "./AuthContext";
@@ -25,6 +26,10 @@ const AuthProvider = ({ children }) => {
   const loginUser = (email, password) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
+  };
+
+  const updateUserProfile = (profile) => {
+    return updateProfile(auth.currentUser, profile);
   };
 
   useEffect(() => {
@@ -62,6 +67,7 @@ const AuthProvider = ({ children }) => {
     resetPasswordMail,
     signInWithGoogle,
     logOutUser,
+    updateUserProfile,
   };
 
   if (loading) {

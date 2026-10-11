@@ -5,7 +5,11 @@ const Profile = () => {
   // console.log(user);
   return (
     <div className="w-full flex flex-col justify-center items-center ">
-      <img className="rounded-full " src={user?.photoURL} alt="" />
+      <img
+        className="rounded-full w-24 h-24"
+        src={user?.photoURL}
+        alt="image"
+      />
       <h3 className="font-black text-2xl">{user?.displayName}</h3>
       <b>{user?.email}</b>
       <p>

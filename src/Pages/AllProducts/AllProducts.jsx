@@ -240,7 +240,7 @@ const AllProducts = () => {
                 color: <span>{data?.colors}</span>
               </p>
               <p className="flex items-center gap-2 ">
-                <FaStar className="text-yellow-400"></FaStar>{" "}
+                <FaStar className="text-yellow-400"></FaStar>
                 <span>
                   {data?.rating}({data?.reviews})
                 </span>
