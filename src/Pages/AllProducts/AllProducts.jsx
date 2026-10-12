@@ -99,14 +99,14 @@ const AllProducts = () => {
       description: productData.description,
     };
     instance.post("/cards", productDetail).then((res) => {
-      if (res.data.insertedId) {
+      if (res.data.exists) {
+        return alert("this products already in your card");
+      } else if (res.data.insertedId) {
         modalRef.current.close();
         Swal.fire({
-          position: "top-end",
           icon: "success",
-          title: "this product has been add",
-          showConfirmButton: false,
-          timer: 1500,
+          title: "Added to Cart!",
+          text: "Product added successfully.",
         });
       }
     });
@@ -175,7 +175,7 @@ const AllProducts = () => {
         </select>
       </div>
       <h2 className="text-start px-7 underline">
-        Total Page: <span className="font-bold text-xl">{allProducts}</span>
+        Total Products: <span className="font-bold text-xl">{allProducts}</span>
       </h2>
 
       <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-3 p-4">

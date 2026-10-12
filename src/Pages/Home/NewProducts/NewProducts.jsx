@@ -40,14 +40,14 @@ const NewProducts = () => {
       description: productData.description,
     };
     instance.post("/cards", productDetail).then((res) => {
-      if (res.data.insertedId) {
+      if (res.data.exists) {
+        return alert("this products already in your card");
+      } else if (res.data.insertedId) {
         modalRef.current.close();
         Swal.fire({
-          position: "top-end",
           icon: "success",
-          title: "this product has been add",
-          showConfirmButton: false,
-          timer: 1500,
+          title: "Added to Cart!",
+          text: "Product added successfully.",
         });
       }
     });
