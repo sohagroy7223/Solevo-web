@@ -16,16 +16,32 @@ const AllProducts = () => {
   const [gender, setGender] = useState("");
   const modalRef = useRef();
   const [data, setProduct] = useState(null);
+  const [allProducts, setAllProducts] = useState(0);
   const [totalPage, setTotalPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
+
+  const limit = 12;
+
   const navigate = useNavigate();
 
   const { data: products = [] } = useQuery({
-    queryKey: ["allProducts", search, category, brand, gender, totalPage],
+    queryKey: [
+      "allProducts",
+      search,
+      category,
+      brand,
+      gender,
+      totalPage,
+      currentPage,
+      allProducts,
+    ],
     queryFn: async () => {
       const res = await instance.get(
-        `/allProducts?search=${search}&category=${category}&brand=${brand}&gender=${gender}`,
+        `/allProducts?limit=${limit}&skip=${currentPage * limit}&search=${search}&category=${category}&brand=${brand}&gender=${gender}`,
       );
-      setTotalPage(res.data.totalProducts);
+      setAllProducts(res.data.totalProducts);
+      const page = Math.ceil(res.data.totalProducts / limit);
+      setTotalPage(page);
       return res.data.products;
     },
   });
@@ -159,7 +175,7 @@ const AllProducts = () => {
         </select>
       </div>
       <h2 className="text-start px-7 underline">
-        Total Page: <span className="font-bold text-xl">{totalPage}</span>
+        Total Page: <span className="font-bold text-xl">{allProducts}</span>
       </h2>
 
       <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-3 p-4">
@@ -289,6 +305,22 @@ const AllProducts = () => {
           </div>
         </div>
       </dialog>
+
+      <div className=" flex flex-row gap-3 justify-center flex-wrap">
+        {[
+          ...Array(totalPage)
+            .keys()
+            .map((i) => (
+              <button
+                onClick={() => setCurrentPage(i)}
+                key={i}
+                className={`btn ${i === currentPage && "btn-primary"}`}
+              >
+                {i}
+              </button>
+            )),
+        ]}
+      </div>
     </div>
   );
 };
