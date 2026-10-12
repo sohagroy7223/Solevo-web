@@ -16,16 +16,17 @@ const AllProducts = () => {
   const [gender, setGender] = useState("");
   const modalRef = useRef();
   const [data, setProduct] = useState(null);
+  const [totalPage, setTotalPage] = useState(0);
   const navigate = useNavigate();
 
   const { data: products = [] } = useQuery({
-    queryKey: ["allProducts", search, category, brand, gender],
+    queryKey: ["allProducts", search, category, brand, gender, totalPage],
     queryFn: async () => {
       const res = await instance.get(
         `/allProducts?search=${search}&category=${category}&brand=${brand}&gender=${gender}`,
       );
-
-      return res.data;
+      setTotalPage(res.data.totalProducts);
+      return res.data.products;
     },
   });
 
@@ -96,20 +97,23 @@ const AllProducts = () => {
   };
 
   // console.log(data);
+  // console.log(totalPage);
 
   return (
     <div className="flex justify-center flex-col gap-2 text-center ">
       <h3 className="text-2xl font-black ">Àll Products</h3>
       <p className="text-blue-500 font-bold">Featured Collections</p>
 
-      <fieldset className="fieldset max-w-md flex justify-center mx-auto w-full">
-        <input
-          type="text"
-          className="input"
-          onChange={handelSearchProducts}
-          placeholder="Search the products here"
-        />
-      </fieldset>
+      <div className="flex items-center  p-0">
+        <fieldset className="fieldset max-w-md flex justify-center mx-auto w-full">
+          <input
+            type="text"
+            className="input"
+            onChange={handelSearchProducts}
+            placeholder="Search the products here"
+          />
+        </fieldset>
+      </div>
 
       <div className="md:flex justify-center md:gap-5 gap-2 w-full items-center md:px-6">
         <select
@@ -117,7 +121,7 @@ const AllProducts = () => {
           onChange={(e) => setCategory(e.target.value)}
           className="select select-md"
         >
-          <option value="">Select Category</option>
+          <option value="">All Category</option>
 
           {categories.map((item) => (
             <option key={item} value={item}>
@@ -131,7 +135,7 @@ const AllProducts = () => {
           onChange={(e) => setBrand(e.target.value)}
           className="select select-md"
         >
-          <option value="">Select Brand</option>
+          <option value="">All Brand</option>
 
           {brands.map((item) => (
             <option key={item} value={item}>
@@ -145,7 +149,7 @@ const AllProducts = () => {
           onChange={(e) => setGender(e.target.value)}
           className="select select-md"
         >
-          <option value="">Select Gender</option>
+          <option value="">All Gender</option>
 
           {genders.map((item) => (
             <option key={item} value={item}>
@@ -154,6 +158,9 @@ const AllProducts = () => {
           ))}
         </select>
       </div>
+      <h2 className="text-start px-7 underline">
+        Total Page: <span className="font-bold text-xl">{totalPage}</span>
+      </h2>
 
       <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-3 p-4">
         {products.map((product) => (
