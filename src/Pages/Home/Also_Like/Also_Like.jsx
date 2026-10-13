@@ -47,9 +47,11 @@ const Also_Like = () => {
       } else if (res.data.insertedId) {
         modalRef.current.close();
         Swal.fire({
+          position: "top-center",
           icon: "success",
-          title: "Added to Cart!",
-          text: "Product added successfully.",
+          title: "your register has been success",
+          showConfirmButton: false,
+          timer: 1500,
         });
       }
     });
