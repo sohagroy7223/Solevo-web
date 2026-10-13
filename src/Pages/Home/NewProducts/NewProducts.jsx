@@ -34,10 +34,11 @@ const NewProducts = () => {
       brand: productData.brand,
       id: productData._id,
       name: productData.name,
+      email: user.email,
+      price: productData.price,
       category: productData.category,
       gender: productData.gender,
       image: productData.image,
-      description: productData.description,
     };
     instance.post("/cards", productDetail).then((res) => {
       if (res.data.exists) {
@@ -151,7 +152,7 @@ const NewProducts = () => {
       <dialog
         ref={modalRef}
         id="my_modal_5"
-        className="modal modal-bottom sm:modal-middle"
+        className="modal modal-bottom sm:modal-middle "
       >
         <div className="modal-box">
           <div className="flex text-center">
@@ -166,17 +167,13 @@ const NewProducts = () => {
               <h2 className="text-sm font-bold">Name : {data?.name}</h2>
               <h2 className="text-sm font-bold">Brand : {data?.brand}</h2>
               <h2 className="text-sm font-bold">category : {data?.category}</h2>
-              <p>
+              <h2 className="text-sm font-bold">
                 color: <span>{data?.colors}</span>
-              </p>
-              <p className="flex items-center gap-2 ">
-                <FaStar className="text-yellow-400"></FaStar>{" "}
-                <span>
-                  {data?.rating}({data?.reviews})
-                </span>
-              </p>
-              <div className="flex justify-between gap-2 items-center ">
-                <div className="md:flex justify-between items-center gap-3 w-full">
+              </h2>
+              <h2 className="text-sm font-bold"> stock: {data?.stock}</h2>
+
+              <div className="flex w-full px-5 gap-2 items-center ">
+                <div className="md:flex justify-center  items-center gap-3 w-full">
                   <div className="flex items-center gap-2">
                     <b className="text-xl">${data?.price}</b>
                     <p className="line-through text-gray-600">
@@ -189,7 +186,7 @@ const NewProducts = () => {
                   <span className="text-sm">%OFF</span>
                 </div>
               </div>
-              <p> stock: {data?.stock}</p>
+              <p>{data?.description}</p>
             </div>
           </div>
           <div className="flex justify-end gap-2 mt-2">

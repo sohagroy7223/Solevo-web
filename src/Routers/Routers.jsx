@@ -8,6 +8,7 @@ import Register from "../Pages/Auth/Register";
 import Profile from "../Components/UserProfile/Profile";
 import Error from "../Components/Error/Error";
 import AllProducts from "../Pages/AllProducts/AllProducts";
+import Card from "../Pages/Card/Card";
 
 export const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ export const router = createBrowserRouter([
       {
         path: "/profile",
         Component: Profile,
+      },
+      {
+        path: "/card",
+        Component: Card,
       },
     ],
   },

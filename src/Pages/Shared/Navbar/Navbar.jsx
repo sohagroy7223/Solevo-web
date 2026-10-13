@@ -66,12 +66,12 @@ const Navbar = () => {
       {user && (
         <li>
           <NavLink
-            to="/"
+            to="card"
             className={({ isActive }) =>
               isActive ? "mr-4 font-bold bg-primary" : "mr-4"
             }
           >
-            Card
+            My Card
           </NavLink>
         </li>
       )}
