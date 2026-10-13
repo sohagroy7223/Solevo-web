@@ -37,6 +37,8 @@ const NewProducts = () => {
       email: user.email,
       price: productData.price,
       category: productData.category,
+      oldPrice: productData.oldPrice,
+      discount: productData.discount,
       gender: productData.gender,
       image: productData.image,
     };

@@ -38,6 +38,8 @@ const Also_Like = () => {
       price: productData.price,
       name: productData.name,
       category: productData.category,
+      oldPrice: productData.oldPrice,
+      discount: productData.discount,
       gender: productData.gender,
       image: productData.image,
     };

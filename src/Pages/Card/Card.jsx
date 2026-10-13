@@ -1,21 +1,45 @@
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import { FaStar } from "react-icons/fa";
 import { motion, easeOut } from "framer-motion";
+import Swal from "sweetalert2";
 
 const Card = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
 
-  const { data: products = [] } = useQuery({
+  const { data: products = [], refetch } = useQuery({
     queryKey: ["card", user.email],
     queryFn: async () => {
       const res = await axiosSecure.get(`/cards?email=${user?.email}`);
       return res.data;
     },
   });
-  console.log(products);
+
+  const handelDeleteCard = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed)
+        axiosSecure.delete(`/cards/${id}`).then((res) => {
+          refetch();
+          if (res.data.deletedCount) {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
+          }
+        });
+    });
+  };
+
   return (
     <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-3 p-4">
       {products.map((product) => (
@@ -49,12 +73,9 @@ const Card = () => {
 
           <div className="p-4 flex flex-col flex-1 ">
             <h2 className="card-title">{product.name}</h2>
-            <p className="flex items-center gap-2">
-              <FaStar className="text-yellow-400"></FaStar>{" "}
-              <span>
-                {product.rating}({product.reviews})
-              </span>
-            </p>
+            <h2 className="">{product.brand}</h2>
+            <h2 className="">{product.category}</h2>
+
             <div className="flex justify-between gap-2 items-center ">
               <div className="md:flex justify-between items-center gap-3 w-full">
                 <div className="flex items-center gap-2">
@@ -71,10 +92,15 @@ const Card = () => {
             </div>
           </div>
           <div className="w-full flex gap-2 justify-center items-center p-2">
-            <button className="btn hover:bg-red-600 hover:text-white duration-150">
+            <button
+              onClick={() => handelDeleteCard(product._id)}
+              className="btn-sm md:btn-md btn hover:bg-red-600 hover:text-white duration-150"
+            >
               Remove card
             </button>
-            <button className="btn hover:btn-primary">Buy Now</button>
+            <button className="btn-sm md:btn-md btn hover:btn-primary">
+              Buy Now
+            </button>
           </div>
         </motion.div>
       ))}
