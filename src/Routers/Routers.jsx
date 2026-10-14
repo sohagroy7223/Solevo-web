@@ -12,6 +12,7 @@ import Card from "../Pages/Card/Card";
 import DashboardLayout from "../Layouts/DashboardLayout/DashboardLayout";
 import Dashboard from "../Pages/Dashboard/Dashborad/Dashboard";
 import Payment_success from "../Components/Payment/Payment_success";
+import PaymentCancel from "../Components/Payment/PaymentCancel";
 
 export const router = createBrowserRouter([
   {
@@ -63,6 +64,10 @@ export const router = createBrowserRouter([
       {
         path: "dashboard/payment-success",
         Component: Payment_success,
+      },
+      {
+        path: "dashboard/payment-cancel",
+        Component: PaymentCancel,
       },
     ],
   },
