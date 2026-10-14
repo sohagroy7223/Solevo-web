@@ -9,6 +9,8 @@ import Profile from "../Components/UserProfile/Profile";
 import Error from "../Components/Error/Error";
 import AllProducts from "../Pages/AllProducts/AllProducts";
 import Card from "../Pages/Card/Card";
+import DashboardLayout from "../Layouts/DashboardLayout/DashboardLayout";
+import Dashboard from "../Pages/Dashboard/Dashborad/Dashboard";
 
 export const router = createBrowserRouter([
   {
@@ -46,6 +48,16 @@ export const router = createBrowserRouter([
       {
         path: "/register",
         Component: Register,
+      },
+    ],
+  },
+  {
+    path: "/",
+    Component: DashboardLayout,
+    children: [
+      {
+        path: "dashboard",
+        Component: Dashboard,
       },
     ],
   },
