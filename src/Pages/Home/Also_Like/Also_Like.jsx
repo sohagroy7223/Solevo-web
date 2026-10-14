@@ -51,7 +51,7 @@ const Also_Like = () => {
         Swal.fire({
           position: "top-center",
           icon: "success",
-          title: "your register has been success",
+          title: "your product successfully add to card",
           showConfirmButton: false,
           timer: 1500,
         });

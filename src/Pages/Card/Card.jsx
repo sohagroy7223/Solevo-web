@@ -16,6 +16,19 @@ const Card = () => {
     },
   });
 
+  const handelPayment = async (product) => {
+    console.log("payment for this product", product);
+    const paymentInfo = {
+      cost: product.price,
+      productId: product._id,
+      email: user.email,
+      productName: product.name,
+    };
+
+    const res = await axiosSecure.post("/create-checkout-session", paymentInfo);
+    console.log(res.data);
+  };
+
   const handelDeleteCard = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -32,7 +45,7 @@ const Card = () => {
           if (res.data.deletedCount) {
             Swal.fire({
               title: "Deleted!",
-              text: "Your file has been deleted.",
+              text: "Your products has been deleted.",
               icon: "success",
             });
           }
@@ -98,7 +111,10 @@ const Card = () => {
             >
               Remove card
             </button>
-            <button className="btn-sm md:btn-md btn hover:btn-primary">
+            <button
+              onClick={() => handelPayment(product)}
+              className="btn-sm md:btn-md btn hover:btn-primary"
+            >
               Buy Now
             </button>
           </div>
