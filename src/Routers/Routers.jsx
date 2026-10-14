@@ -11,6 +11,7 @@ import AllProducts from "../Pages/AllProducts/AllProducts";
 import Card from "../Pages/Card/Card";
 import DashboardLayout from "../Layouts/DashboardLayout/DashboardLayout";
 import Dashboard from "../Pages/Dashboard/Dashborad/Dashboard";
+import Payment_success from "../Components/Payment/Payment_success";
 
 export const router = createBrowserRouter([
   {
@@ -56,8 +57,12 @@ export const router = createBrowserRouter([
     Component: DashboardLayout,
     children: [
       {
-        path: "dashboard",
+        path: "/dashboard",
         Component: Dashboard,
+      },
+      {
+        path: "dashboard/payment-success",
+        Component: Payment_success,
       },
     ],
   },
