@@ -14,6 +14,7 @@ import Dashboard from "../Pages/Dashboard/Dashborad/Dashboard";
 import Payment_success from "../Components/Payment/Payment_success";
 import PaymentCancel from "../Components/Payment/PaymentCancel";
 import Arrivals from "../Pages/Arrivals/Arrivals";
+import About from "../Pages/About/About";
 
 export const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ export const router = createBrowserRouter([
       {
         path: "/arrivals",
         Component: Arrivals,
+      },
+      {
+        path: "/about",
+        Component: About,
       },
     ],
   },

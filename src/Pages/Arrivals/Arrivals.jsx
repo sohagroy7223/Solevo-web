@@ -58,7 +58,7 @@ const Arrivals = () => {
 
   return (
     <div className="flex  justify-center flex-col gap-3 text-center items-center">
-      <h3 className="text-2xl font-black ">You Might Also Like</h3>
+      <h3 className="text-2xl font-black ">New Arrivals Products</h3>
       <p className="text-blue-500 font-bold">Featured Collections</p>
 
       <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-3">

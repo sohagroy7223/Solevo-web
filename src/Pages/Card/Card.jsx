@@ -17,7 +17,7 @@ const Card = () => {
   });
 
   const handelPayment = async (product) => {
-    console.log("payment for this product", product);
+    // console.log("payment for this product", product);
     const paymentInfo = {
       cost: product.price,
       productId: product._id,

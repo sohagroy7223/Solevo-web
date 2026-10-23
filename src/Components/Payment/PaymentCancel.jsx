@@ -1,3 +1,4 @@
+import { IoIosArrowRoundBack } from "react-icons/io";
 import { useNavigate } from "react-router";
 
 const PaymentCancel = () => {
@@ -10,7 +11,7 @@ const PaymentCancel = () => {
     <div className="flex flex-col justify-center items-center ">
       <h3 className="text-md font-bold">payment has been cancel</h3>
       <button onClick={handelNavigate} className="btn">
-        Back to Home page
+        <IoIosArrowRoundBack size={25} /> Back to Home page
       </button>
     </div>
   );
