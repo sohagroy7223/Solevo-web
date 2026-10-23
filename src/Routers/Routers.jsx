@@ -13,6 +13,7 @@ import DashboardLayout from "../Layouts/DashboardLayout/DashboardLayout";
 import Dashboard from "../Pages/Dashboard/Dashborad/Dashboard";
 import Payment_success from "../Components/Payment/Payment_success";
 import PaymentCancel from "../Components/Payment/PaymentCancel";
+import Arrivals from "../Pages/Arrivals/Arrivals";
 
 export const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ export const router = createBrowserRouter([
       {
         path: "/card",
         Component: Card,
+      },
+      {
+        path: "/arrivals",
+        Component: Arrivals,
       },
     ],
   },
