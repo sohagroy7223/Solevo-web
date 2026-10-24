@@ -2,6 +2,9 @@ import { GrFormNextLink } from "react-icons/gr";
 import { Link } from "react-router";
 import image1 from "/image1.png";
 import image2 from "/story.png";
+import { FaExclamation } from "react-icons/fa";
+import { SiGooglegemini, SiShopify } from "react-icons/si";
+import { FaHandshakeSimple } from "react-icons/fa6";
 
 const About = () => {
   return (
@@ -46,8 +49,35 @@ const About = () => {
       <div className="p-5">
         <p className="text-sm font-medium">WHY CHOOSE SOLEVO</p>
         <h3 className="text-3xl font-black">THE SOLEVO DIFFERENCE</h3>
-        <div>
-          <div></div>
+        <div className="grid md:grid-cols-4 grid-cols-2  gap-2 mt-3">
+          <div className="border border-gray-400 p-3 flex flex-col justify-center items-center text-center space-y-1 rounded-xl">
+            <div className="flex bg-fuchsia-100 p-2 rounded-full w-10">
+              <FaExclamation size={20} /> <FaExclamation size={20} />
+            </div>
+            <b>Everyday Comfort</b>
+            <p>Designed around comfort for daily wear</p>
+          </div>
+          <div className="border border-gray-400 p-3 flex flex-col justify-center items-center text-center space-y-1 rounded-xl">
+            <div className="flex bg-blue-100 p-2 rounded-full w-10">
+              <SiGooglegemini size={35} />
+            </div>
+            <b>Modern Style</b>
+            <p>Fresh Looks for different personal styles </p>
+          </div>
+          <div className="border border-gray-400 p-3 flex flex-col justify-center items-center text-center space-y-1 rounded-xl">
+            <div className="flex bg-fuchsia-100 p-2 rounded-full w-10">
+              <SiShopify size={35} />
+            </div>
+            <b>Easy Shopping</b>
+            <p>A simple and convenient Shopping experience.</p>
+          </div>
+          <div className="border border-gray-400 p-3 flex flex-col justify-center items-center text-center space-y-1 rounded-xl">
+            <div className="flex bg-blue-100 p-2 rounded-full w-10">
+              <FaHandshakeSimple size={35} />
+            </div>
+            <b>Customer First</b>
+            <p>Focused on making shopping easier for customers.</p>
+          </div>
         </div>
       </div>
     </div>
