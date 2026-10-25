@@ -5,6 +5,8 @@ import image2 from "/story.png";
 import { FaExclamation } from "react-icons/fa";
 import { SiGooglegemini, SiShopify } from "react-icons/si";
 import { FaHandshakeSimple } from "react-icons/fa6";
+import vision from "/vision.png";
+import favorite from "/favorite.png";
 
 const About = () => {
   return (
@@ -78,6 +80,22 @@ const About = () => {
             <b>Customer First</b>
             <p>Focused on making shopping easier for customers.</p>
           </div>
+        </div>
+      </div>
+      <div className="p-5">
+        <img className="rounded-2xl" src={vision} alt="" />
+      </div>
+      <div className="p-5 md:relative">
+        <img className="rounded-2xl h-90 w-full" src={favorite} alt="" />
+        <div className="absolute md:-mt-60 -mt-80 md:px-20 px-6 space-y-2">
+          <p className="font-bold">Ready to step Forward</p>
+          <h3 className="text-3xl font-black">Find your next favorite pair</h3>
+          <p className="text-sm font-medium">
+            Explore our latest collection and find the style that feels like you
+          </p>
+          <Link to="/allProducts" className="btn btn-primary ">
+            Explore Collection <GrFormNextLink size={25} />
+          </Link>
         </div>
       </div>
     </div>
