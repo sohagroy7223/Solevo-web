@@ -55,72 +55,78 @@ const Card = () => {
   };
 
   return (
-    <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-3 p-4">
-      {products.map((product) => (
-        <motion.div
-          initial={{
-            opacity: 0,
-            y: 80,
-          }}
-          whileInView={{
-            opacity: 1,
-            y: 0,
-          }}
-          viewport={{
-            once: true,
-            amount: 0.2,
-          }}
-          transition={{
-            duration: 0.7,
-            ease: easeOut,
-          }}
-          key={product._id}
-          className="card bg-base-100 shadow-sm"
-        >
-          <figure>
-            <img
-              className="md:h-50 h-35 w-full bg-gray-600 rounded-xl object-cover transition-transform duration-500 ease-in-out hover:scale-110"
-              src={product.image}
-              alt="Shoes"
-            />
-          </figure>
+    <div>
+      <div className="text-center">
+        <p className="text-sm font-medium">Your Card</p>
+        <h3 className="text-3xl font-black">All card is here </h3>
+      </div>
+      <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-3 p-4">
+        {products.map((product) => (
+          <motion.div
+            initial={{
+              opacity: 0,
+              y: 80,
+            }}
+            whileInView={{
+              opacity: 1,
+              y: 0,
+            }}
+            viewport={{
+              once: true,
+              amount: 0.2,
+            }}
+            transition={{
+              duration: 0.7,
+              ease: easeOut,
+            }}
+            key={product._id}
+            className="card bg-base-100 shadow-sm"
+          >
+            <figure>
+              <img
+                className="md:h-50 h-35 w-full bg-gray-600 rounded-xl object-cover transition-transform duration-500 ease-in-out hover:scale-110"
+                src={product.image}
+                alt="Shoes"
+              />
+            </figure>
 
-          <div className="p-4 flex flex-col flex-1 ">
-            <h2 className="card-title">{product.name}</h2>
-            <h2 className="">{product.brand}</h2>
-            <h2 className="">{product.category}</h2>
+            <div className="p-4 flex flex-col flex-1 ">
+              <h2 className="card-title">{product.name}</h2>
+              <h2 className="">{product.brand}</h2>
+              <h2 className="">{product.category}</h2>
 
-            <div className="flex justify-between gap-2 items-center ">
-              <div className="md:flex justify-between items-center gap-3 w-full">
-                <div className="flex items-center gap-2">
-                  <b className="text-xl">${product.price}</b>
-                  <p className="line-through text-gray-600">
-                    ${product.oldPrice}
-                  </p>
+              <div className="flex justify-between gap-2 items-center ">
+                <div className="md:flex justify-between items-center gap-3 w-full">
+                  <div className="flex items-center gap-2">
+                    <b className="text-xl">${product.price}</b>
+                    <p className="line-through text-gray-600">
+                      ${product.oldPrice}
+                    </p>
+                  </div>
+                </div>
+                <div className="border flex items-center text-sm bg-red-100 rounded-full md:p-1">
+                  <p>{product.discount}</p>
+                  <span className="text-sm">%OFF</span>
                 </div>
               </div>
-              <div className="border flex items-center text-sm bg-red-100 rounded-full md:p-1">
-                <p>{product.discount}</p>
-                <span className="text-sm">%OFF</span>
-              </div>
             </div>
-          </div>
-          <div className="w-full flex gap-2 justify-center items-center p-2">
-            <button
-              onClick={() => handelDeleteCard(product._id)}
-              className="btn-sm md:btn-md btn hover:bg-red-600 hover:text-white duration-150"
-            >
-              Remove card
-            </button>
-            <button
-              onClick={() => handelPayment(product)}
-              className="btn-sm md:btn-md btn hover:btn-primary"
-            >
-              Buy Now
-            </button>
-          </div>
-        </motion.div>
-      ))}
+            <div className="w-full flex gap-2 justify-center items-center p-2">
+              <button
+                onClick={() => handelDeleteCard(product._id)}
+                className="btn-sm md:btn-md btn hover:bg-red-600 hover:text-white duration-150"
+              >
+                Remove card
+              </button>
+              <button
+                onClick={() => handelPayment(product)}
+                className="btn-sm md:btn-md btn hover:btn-primary"
+              >
+                Buy Now
+              </button>
+            </div>
+          </motion.div>
+        ))}
+      </div>
     </div>
   );
 };

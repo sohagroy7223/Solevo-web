@@ -11,9 +11,9 @@ import favorite from "/favorite.png";
 const About = () => {
   return (
     <div>
-      <div className="md:flex bg-[#e3d9d06d] p-5 gap-7">
+      <div className="md:flex bg-[#e3d9d06d] p-5 ">
         {/* content div */}
-        <div className="flex flex-col md:items-start items-center space-y-2 justify-center md:w-6/12">
+        <div className="flex flex-col md:items-start items-center space-y-2 justify-center md:w-10/12 p-2 ">
           <p className="text-sm font-medium">About Solevo</p>
           <h3 className="text-3xl font-black">Step Into Your Style</h3>
           <p>
@@ -25,7 +25,7 @@ const About = () => {
           </Link>
         </div>
         {/* img div */}
-        <div className="md:w-xl">
+        <div className="md:w-xl md:ml-50 ">
           <img className="md:w-80" src={image1} alt="" />
         </div>
       </div>
@@ -85,16 +85,26 @@ const About = () => {
       <div className="p-5">
         <img className="rounded-2xl" src={vision} alt="" />
       </div>
-      <div className="p-5 md:relative">
-        <img className="rounded-2xl h-90 w-full" src={favorite} alt="" />
-        <div className="absolute md:-mt-60 -mt-80 md:px-20 px-6 space-y-2">
-          <p className="font-bold">Ready to step Forward</p>
-          <h3 className="text-3xl font-black">Find your next favorite pair</h3>
+      <div className="relative m-5 overflow-hidden rounded-2xl">
+        <img
+          className="h-90 w-full rounded-2xl object-cover"
+          src={favorite}
+          alt="Solevo sneakers collection"
+        />
+
+        <div className="absolute inset-0 flex flex-col justify-center space-y-2 px-6 md:px-20">
+          <p className="font-bold">Ready to Step Forward</p>
+
+          <h3 className="text-2xl font-black sm:text-3xl">
+            Find your next favorite pair
+          </h3>
+
           <p className="text-sm font-medium">
             Explore our latest collection and find the style that feels like you
           </p>
-          <Link to="/allProducts" className="btn btn-primary ">
-            Explore Collection <GrFormNextLink size={25} />
+
+          <Link to="/allProducts" className="btn btn-primary w-fit">
+            Shop Now <GrFormNextLink size={25} />
           </Link>
         </div>
       </div>

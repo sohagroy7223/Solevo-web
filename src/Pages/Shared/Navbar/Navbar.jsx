@@ -75,16 +75,7 @@ const Navbar = () => {
           </NavLink>
         </li>
       )}
-      <li>
-        <NavLink
-          to="/"
-          className={({ isActive }) =>
-            isActive ? "mr-4 font-bold bg-primary" : "mr-4"
-          }
-        >
-          Collection
-        </NavLink>
-      </li>
+
       <li>
         <NavLink
           to="about"
