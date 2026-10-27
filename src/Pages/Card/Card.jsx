@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../Hooks/useAuth";
-import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { motion, easeOut } from "framer-motion";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const Card = () => {
   const { user } = useAuth();
@@ -20,10 +20,12 @@ const Card = () => {
     // console.log("payment for this product", product);
     const paymentInfo = {
       cost: product.price,
-      productId: product._id,
+      productId: product.id,
       email: user.email,
       productName: product.name,
     };
+
+    console.log("Payment Info:", paymentInfo);
 
     const res = await axiosSecure.post("/create-checkout-session", paymentInfo);
     window.location.href = res.data.url;
