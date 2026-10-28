@@ -43,7 +43,7 @@ const Payment_history = () => {
       }
     });
   };
-
+  //   console.log(allHistory);
   return (
     <div className="overflow-x-auto">
       <table className="table">
@@ -54,6 +54,7 @@ const Payment_history = () => {
             <th>Name</th>
             <th>Cost</th>
             <th>Payment-status</th>
+            <th>Date</th>
             <th>transaction Id</th>
             <th>Action</th>
           </tr>
@@ -65,6 +66,7 @@ const Payment_history = () => {
               <td>{history.productName}</td>
               <td className="font-bold">${history.amount}</td>
               <td>{history.paymentStatus}</td>
+              <td>{new Date(history.paidAt).toLocaleString("en-BD")}</td>
               <td>{history.transactionId}</td>
               <td>
                 <button
