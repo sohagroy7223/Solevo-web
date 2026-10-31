@@ -1,19 +1,26 @@
 import axios from "axios";
 import { useEffect } from "react";
 import useAuth from "./useAuth";
-// import { useEffect } from "react";
 
 const axiosSecure = axios.create({
   baseURL: "https://solevo-web-server-1.onrender.com",
 });
+
 const useAxiosSecure = () => {
   const { user } = useAuth();
+
   useEffect(() => {
-    // request interceptor
-    const resInterceptor = axiosSecure.interceptors.request.use((config) => {
-      config.headers.Authorization = `Bearer ${user.accessToken}`;
-      return config;
-    });
+    const resInterceptor = axiosSecure.interceptors.request.use(
+      async (config) => {
+        if (user) {
+          const token = await user.getIdToken();
+          config.headers.Authorization = `Bearer ${token}`;
+        }
+
+        return config;
+      },
+      (error) => Promise.reject(error),
+    );
 
     return () => {
       axiosSecure.interceptors.request.eject(resInterceptor);

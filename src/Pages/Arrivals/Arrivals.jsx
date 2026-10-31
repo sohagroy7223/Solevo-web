@@ -6,12 +6,13 @@ import { useRef, useState } from "react";
 import useAuth from "../../Hooks/useAuth";
 import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
+import Loading from "../../Components/Loading/Loading";
 
 const Arrivals = () => {
   const axiosSecure = useAxiosSecure();
   const modalRef = useRef();
   const [data, setProduct] = useState(null);
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const navigate = useNavigate();
 
   const { data: products = [] } = useQuery({
@@ -21,6 +22,10 @@ const Arrivals = () => {
       return res.data;
     },
   });
+
+  if (loading) {
+    return <Loading></Loading>;
+  }
 
   const handelShowModal = (selectedProduct) => {
     setProduct(selectedProduct);
