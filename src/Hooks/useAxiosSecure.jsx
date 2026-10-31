@@ -4,7 +4,7 @@ import useAuth from "./useAuth";
 // import { useEffect } from "react";
 
 const axiosSecure = axios.create({
-  baseURL: "http://localhost:3000/",
+  baseURL: "https://solevo-web-server-1.onrender.com",
 });
 const useAxiosSecure = () => {
   const { user } = useAuth();
