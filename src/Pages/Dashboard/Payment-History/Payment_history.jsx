@@ -24,11 +24,10 @@ const Payment_history = () => {
         <thead>
           <tr>
             <th>No</th>
-            <th>Name</th>
-            <th>Cost</th>
-            <th>Payment-status</th>
-            <th>transaction Id</th>
+            <th>Product Name</th>
+            <th>Amount</th>
             <th>Date</th>
+            <th>transaction Id</th>
           </tr>
         </thead>
         <tbody>
@@ -37,9 +36,8 @@ const Payment_history = () => {
               <th>{index + 1}</th>
               <td>{history.productName}</td>
               <td className="font-bold">${history.amount}</td>
-              <td>{history.paymentStatus}</td>
-              <td>{history.transactionId}</td>
               <td>{new Date(history.paidAt).toLocaleString("en-BD")}</td>
+              <td>{history.transactionId}</td>
             </tr>
           ))}
         </tbody>
