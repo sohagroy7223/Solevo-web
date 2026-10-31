@@ -307,6 +307,15 @@ const AllProducts = () => {
       </dialog>
 
       <div className=" flex flex-row gap-3 justify-center flex-wrap">
+        {currentPage > 0 && (
+          <button
+            className="btn"
+            onClick={() => setCurrentPage(currentPage - 1)}
+          >
+            prev
+          </button>
+        )}
+
         {[
           ...Array(totalPage)
             .keys()
@@ -320,6 +329,14 @@ const AllProducts = () => {
               </button>
             )),
         ]}
+        {currentPage < totalPage - 1 && (
+          <button
+            className="btn"
+            onClick={() => setCurrentPage(currentPage + 1)}
+          >
+            Next
+          </button>
+        )}
       </div>
     </div>
   );
