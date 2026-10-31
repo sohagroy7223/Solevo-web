@@ -40,7 +40,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/card",
-        Component: Card,
+        element: (
+          <PrivateRoute>
+            <Card></Card>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/arrivals",

@@ -11,7 +11,7 @@ const Card = () => {
   const axiosSecure = useAxiosSecure();
 
   const { data: products = [], refetch } = useQuery({
-    queryKey: ["card", user.email],
+    queryKey: ["card", user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get(`/cards?email=${user?.email}`);
       return res.data;
