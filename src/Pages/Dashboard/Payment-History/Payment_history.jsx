@@ -1,9 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../Hooks/useAuth";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-import { MdDelete } from "react-icons/md";
-import Swal from "sweetalert2";
-import { VscRepoFetch } from "react-icons/vsc";
 
 const Payment_history = () => {
   const { user } = useAuth();
@@ -19,30 +16,6 @@ const Payment_history = () => {
     },
   });
 
-  const handelDelete = (id) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        axiosSecure.delete(`/payment/${id}`).then((res) => {
-          VscRepoFetch();
-          if (res.data.deletedCount) {
-            Swal.fire({
-              title: "Deleted!",
-              text: "Your file has been deleted.",
-              icon: "success",
-            });
-          }
-        });
-      }
-    });
-  };
   //   console.log(allHistory);
   return (
     <div className="overflow-x-auto">
@@ -54,9 +27,8 @@ const Payment_history = () => {
             <th>Name</th>
             <th>Cost</th>
             <th>Payment-status</th>
-            <th>Date</th>
             <th>transaction Id</th>
-            <th>Action</th>
+            <th>Date</th>
           </tr>
         </thead>
         <tbody>
@@ -66,17 +38,8 @@ const Payment_history = () => {
               <td>{history.productName}</td>
               <td className="font-bold">${history.amount}</td>
               <td>{history.paymentStatus}</td>
-              <td>{new Date(history.paidAt).toLocaleString("en-BD")}</td>
               <td>{history.transactionId}</td>
-              <td>
-                <button
-                  onClick={() => handelDelete(history._id)}
-                  className="tooltip  btn-square"
-                  data-tip="Delete"
-                >
-                  <MdDelete size={25} />
-                </button>
-              </td>
+              <td>{new Date(history.paidAt).toLocaleString("en-BD")}</td>
             </tr>
           ))}
         </tbody>

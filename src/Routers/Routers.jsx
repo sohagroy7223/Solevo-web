@@ -16,6 +16,7 @@ import PaymentCancel from "../Components/Payment/PaymentCancel";
 import Arrivals from "../Pages/Arrivals/Arrivals";
 import About from "../Pages/About/About";
 import Payment_history from "../Pages/Dashboard/Payment-History/Payment_history";
+import MyProducts from "../Pages/Dashboard/MyProducts/MyProducts";
 
 export const router = createBrowserRouter([
   {
@@ -79,6 +80,10 @@ export const router = createBrowserRouter([
       {
         path: "dashboard/payment-cancel",
         Component: PaymentCancel,
+      },
+      {
+        path: "/my-products",
+        Component: MyProducts,
       },
       {
         path: "/payment-history",
